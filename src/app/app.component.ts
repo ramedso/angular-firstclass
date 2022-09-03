@@ -10,29 +10,26 @@ export class AppComponent {
   birthYear = 2001;
   counterRun = 0;
   status = '';
-  round = 0;
+  round = 1;
   timer = setInterval(() => {
     this.counterRun++;
 
-    if (this.round < 1) {
-      this.status = 'Are you ready?';
+    if (this.round >= 1 && this.round <= 8) {
+      this.status = 'Keep going!';
     } else if (this.round > 8) {
       this.status = 'You rock it!';
-    } else if (this.round >= 1 && this.round <= 8) {
-      this.status = 'Keep going!';
+      document.getElementById('app.run').innerHTML = 'Run: -';
+      document.getElementById('app.rest').innerHTML = 'Rest: -';
+      document.getElementById('app.round').innerHTML = 'Round: 0';
     }
-  }, 1000);
 
-  getAge() {
-    const currentYear = new Date().getFullYear();
-    return currentYear - this.birthYear;
-  }
+    if (this.getSeconds() == 21) {
+      document.getElementById('app.run').innerHTML = 'Run: -';
+      this.counterRun = 0;
+    }
+  }, 100);
 
-  getRestSeconds() {
-    return this.counterRun;
-  }
-
-  getRunSeconds() {
+  getSeconds() {
     return this.counterRun;
   }
 
@@ -41,8 +38,8 @@ export class AppComponent {
   }
 
   getRound() {
-    if (this.getRunSeconds() == 20) {
-      this.timer = 0;
+    if (this.getSeconds() == 21) {
+      this.counterRun = 0;
       this.round++;
     }
     return this.round;
