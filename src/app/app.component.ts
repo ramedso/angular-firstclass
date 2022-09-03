@@ -25,8 +25,9 @@ export class AppComponent {
 
     if (this.getSeconds() == 21) {
       document.getElementById('app.run').innerHTML = 'Run: -';
-      this.counterRun = 0;
+      this.counterRun--;
     }
+
   }, 100);
 
   getSeconds() {
